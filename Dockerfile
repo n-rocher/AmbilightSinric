@@ -1,4 +1,4 @@
-FROM node:15-alpine
+FROM arm32v7/node:15-alpine
 WORKDIR /usr/src/app
 
 COPY package*.json ./
