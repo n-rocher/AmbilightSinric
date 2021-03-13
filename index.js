@@ -1,36 +1,29 @@
-const {
-    SinricPro,
-    SinricProActions,
-    raiseEvent,
-    eventNames,
-    SinricProUdp
-} = require("sinricpro");
+require('dotenv').config();
 
-const appKey = "4bc6a1e3-ad23-45cc-a14e-f867889e800a";
-const secretKey = "98cda641-d05d-4d0e-8e5c-c55cac77ef6a-2fd4c9d6-6e52-4aa6-b72b-56a19931248f";
-const device1 = "604cba9f3918be5d9712ea9d";
+const { SinricPro, SinricProActions } = require("sinricpro");
 
-const deviceId = [device1];
+const appKey = process.env.SINRIC_KEY
+const secretKey = process.env.SINRIC_SECRET
+const device1 = process.env.SINRIC_DEVICE
 
-const AMBILIGHT_IP = "192.168.1.6"
-const AMBILIGHT_PORT = 1024
+const deviceId = [device1]
 
-var WebSocketClient = require('websocket').client;
-var client = new WebSocketClient();
+const AMBILIGHT_IP = process.env.HYPER_IP
+const AMBILIGHT_PORT = process.env.HYPER_PORT
+
+var WebSocketClient = require('websocket').client
+var client = new WebSocketClient()
 
 client.connect(`ws://${AMBILIGHT_IP}:${AMBILIGHT_PORT}/`);
 
 let HYPERHDR_SOCKET = null
 
 client.on("connect", connection => {
-
     HYPERHDR_SOCKET = connection
     connection.send(JSON.stringify({ "command": "authorize", "tan": 1, "subcommand": "adminRequired" }))
-
 })
 
 function sendToHyperHDR(data) {
-
     if (!HYPERHDR_SOCKET.connected) {
         client.connect(`ws://${AMBILIGHT_IP}:${AMBILIGHT_PORT}/`);
     }
@@ -63,11 +56,8 @@ function setBrightness(deviceId, data) {
 
 function setColor(deviceId, data) {
     console.log("setColor", data)
-
     start()
-
     if (data) {
-
         if (data.r === data.g && data.g === data.b && data.b === 128) {
             sendToHyperHDR({ "command": "clear", "tan": 1, "priority": 1 })
             sendToHyperHDR({ "command": "sourceselect", "tan": 1, "priority": 1 })
@@ -82,7 +72,6 @@ function setColor(deviceId, data) {
                 "origin": "Web Configuration"
             })
         }
-
     } else {
         sendToHyperHDR({
             "command": "sourceselect",
@@ -95,13 +84,8 @@ function setColor(deviceId, data) {
 
 function setColorTemperature(deviceId, data) {
     console.log("setColorTemperature", data)
-
     start()
-
     data = colorTemperatureToRGB(data)
-
-    console.log(data)
-
     sendToHyperHDR({
         "command": "color",
         "tan": 1,
@@ -110,8 +94,6 @@ function setColorTemperature(deviceId, data) {
         "duration": 0,
         "origin": "Web Configuration"
     })
-
-
     return true
 }
 
@@ -122,12 +104,7 @@ SinricProActions(sinricpro, {
     setBrightness,
     setColor,
     setColorTemperature
-});
-
-// setInterval(() => {
-//     raiseEvent(sinricpro, eventNames.powerState, device1, { state: "On" });
-// }, 10000);
-
+})
 
 function start() {
     sendToHyperHDR({
@@ -185,12 +162,9 @@ function colorTemperatureToRGB(kelvin) {
     }
 }
 
-
 function clamp(x, min, max) {
-
     if (x < min) { return min; }
     if (x > max) { return max; }
 
     return Math.round(x);
-
 }
