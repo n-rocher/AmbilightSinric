@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { SinricPro, SinricProActions } = require("sinricpro");
+const { SinricPro, SinricProActions, raiseEvent, eventNames } = require("sinricpro");
 
 const appKey = process.env.SINRIC_KEY
 const secretKey = process.env.SINRIC_SECRET
@@ -97,14 +97,6 @@ function setColorTemperature(deviceId, data) {
     return true
 }
 
-const sinricpro = new SinricPro(appKey, deviceId, secretKey, false);
-
-SinricProActions(sinricpro, {
-    setPowerState,
-    setBrightness,
-    setColor,
-    setColorTemperature
-})
 
 function start() {
     sendToHyperHDR({
@@ -168,3 +160,34 @@ function clamp(x, min, max) {
 
     return Math.round(x);
 }
+
+function initiate() {
+    let sinricpro = new SinricPro(appKey, deviceId, secretKey, false);
+
+    SinricProActions(sinricpro, {
+        setPowerState,
+        setBrightness,
+        setColor,
+        setColorTemperature
+    })
+
+    sinricpro.on("error", _ => {})
+
+    sinricpro.on("close", _ => {
+        console.info("[INFO] Close event")
+        sinricpro = null
+        setTimeout(initiate, 2000)
+    })
+
+    sinricpro.on("open", _ => {
+        console.info("[INFO] Open event")
+
+        setTimeout(_ => {
+            raiseEvent(sinricpro, eventNames.powerState, device1, { state: "On" });
+        }, 1000)
+
+    })
+
+}
+
+initiate()
