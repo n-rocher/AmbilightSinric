@@ -33,7 +33,11 @@ Pour commencer, il faut construire l'image dans le repository local :
 
 Ensuite, lancez le service avec la commande suivante :
 
-`docker run --restart always ambilightsinric`
+`docker run -d --restart always --name ambilightsinric ambilightsinric`
+
+Vous pouvez voir les logs avec la commande suivante :
+
+`docker logs ambilightsinric`
 
 #### 3. Liaison Sinric <> Google Home
 1. Ouvrez l'application `Google Home` sur votre téléphone
