@@ -1,6 +1,6 @@
 # AmbilightSinric
 
-Permet de contrôler son Ambilight [HyperHDR](https://github.com/awawa-dev/HyperHDR) directement via des applications comme Google Home, l'Assistant Google, Samsung Smarthings, ou autre.
+Permet de contrôler son Ambilight [HyperHDR](https://github.com/awawa-dev/HyperHDR) directement via Google Home, l'Assistant Google, ou Samsung Smarthings.
 
 ### Utilisation
 
