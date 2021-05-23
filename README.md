@@ -33,7 +33,7 @@ Pour commencer, il faut construire l'image dans le repository local :
 
 Ensuite, lancez le service avec la commande suivante :
 
-`docker run -d --restart always --name ambilightsinric ambilightsinric`
+`docker run -d --restart always --name ambilightsinric --env-file ./.env ambilightsinric`
 
 Vous pouvez voir les logs avec la commande suivante :
 
