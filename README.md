@@ -56,5 +56,3 @@ Vous pouvez voir les logs avec la commande suivante :
 1. Cliquez sur `Sinric Pro` dans la liste 
 1. Terminez la liaison avec votre compte
 1. Les appareils de Sinric apparaitront dans l'application
-
-
