@@ -28,10 +28,12 @@ Par défaut, l'image utilisée est build pour l'architecture d'une **Raspberry P
 Vous pouvez changer l'image de ``nodejs`` utilisé dans la première ligne du fichier ``Dockerfile``.
 
 Pour commencer, il faut construire l'image dans le repository local :
-> `docker build . -t ambilightsinric`
+
+`docker build . -t ambilightsinric`
 
 Ensuite, lancez le service avec la commande suivante :
-> `docker run --restart always ambilightsinric`
+
+`docker run --restart always ambilightsinric`
 
 #### 3. Liaison Sinric <> Google Home
 1. Ouvrez l'application `Google Home` sur votre téléphone
