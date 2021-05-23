@@ -25,7 +25,7 @@ Pour faire fonctionner ce projet, il vous faudra utiliser le service gratuit nom
 ##### Utilisation avec docker sur Raspberry Pi
 Par défaut, l'image utilisée est build pour l'architecture d'une **Raspberry Pi 3**.
 
-Vous pouvez changer l'image de ``nodejs`` utilisé dans la première ligne du fichier ``Dockerfile``.
+Vous pouvez changer l'image de ``nodejs`` utilisée dans la première ligne du fichier ``Dockerfile``.
 
 Pour commencer, il faut construire l'image dans le repository local :
 
