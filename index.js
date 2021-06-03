@@ -1,5 +1,8 @@
 require('dotenv').config();
 
+const express = require("express")
+const app = express()
+
 const { SinricPro, SinricProActions, raiseEvent, eventNames } = require("sinricpro");
 
 const appKey = process.env.SINRIC_KEY
@@ -171,7 +174,7 @@ function initiate() {
         setColorTemperature
     })
 
-    sinricpro.on("error", _ => {})
+    sinricpro.on("error", _ => { })
 
     sinricpro.on("close", _ => {
         console.info("[INFO] Close event")
@@ -188,6 +191,38 @@ function initiate() {
 
     })
 
+
+    app.get("/on", (req, res) => {
+
+        console.log(new Date(), "RECEIVED : on")
+
+        setTimeout(_ => {
+            setPowerState("", "On")
+            raiseEvent(sinricpro, eventNames.powerState, device1, { state: "On" });
+            res.send("Ambilight allumé.")
+        }, 2000)
+
+    })
+
+
+    app.get("/off", (req, res) => {
+
+        console.log(new Date(), "RECEIVED : off")
+
+        setPowerState("", "Off")
+        raiseEvent(sinricpro, eventNames.powerState, device1, { state: "Off" });
+
+        res.send("Ambilight éteint.")
+    })
+
+
+    app.listen(8080, _ => {
+        console.log("API REST READY")
+    })
+
 }
 
 initiate()
+
+
+
