@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ambilightsinric:
+    build: .
+    restart: always
+    ports:
+     - 8080:8080
+    env_file:
+     - ./.env
+    environment:
+     - NODE_ENV=production
