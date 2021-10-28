@@ -49,7 +49,7 @@ function setBrightness(deviceId, data) {
     console.log("setBrightness", data)
     start()
     if (data) {
-        sendToHyperHDR({ "command": "adjustment", "tan": 1, "adjustment": { "luminanceGain": data } })
+        sendToHyperHDR({ "command": "adjustment", "tan": 1, "adjustment": { "luminanceGain": data/100 } })
     } else {
         sendToHyperHDR({ "command": "clear", "tan": 1, "priority": 1 })
         sendToHyperHDR({ "command": "sourceselect", "tan": 1, "priority": 1 })
