@@ -2,9 +2,6 @@
 
 Permet de contrôler son Ambilight [HyperHDR](https://github.com/awawa-dev/HyperHDR) directement via Google Home, l'Assistant Google, Alexa, IFTT, ou Samsung Smarthings.
 
-> Vous souhaitez allumer et éteindre votre Ambilight en même temps que votre télé/box Android Tv ?
-> Découvrez le projet [AmbilightController](https://github.com/n-rocher/AmbilightController) !
-
 ### Utilisation
 
 Pour faire fonctionner ce projet, il vous faudra utiliser le service gratuit nommé [Sinric](https://sinric.pro/).
